@@ -2,7 +2,7 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
     
 
-        <div class="post-preview" ng-repeat="view in myDetails.views">
+        <div class="post-preview" ng-repeat="view in myDetails.views|orderBy:'name'">
             <!-- <a href="#" ng-href="{{view.url}}" > -->
                 <!-- <div>
                     {{view.aliases[0]}}

@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <h2>Book Details :</h2>
+        <hr>
+        <!-- <p><strong>Book Name - </strong> {{myBook.name}}</p> -->
+        <!-- <p><strong>Character Aliase Name - </strong> {{myCharacter.aliases}}</p> -->
+
+        <div class="post-preview" style="color:darkgoldenrod">
+            <strong>Book Name - </strong><span book>{{myBook.name}} </span><br/><br/>
+            <strong>Author Name - </strong> <span book>{{myBook.authors}}</span><br/><br/>
+            <strong>Publisher -  </strong><span book>{{myBook.publisher}}</span><br/><br/>
+            <strong>Release Date - </strong><span book>{{myBook.releaseDate|date:'dd/MMM/yyyy'}}</span><br/><br/>
+            <strong>Pages - </strong><span book>{{myBook.numberOfPages}}</span><br/><br/>
+        </div>
+        <hr>
+      
+     
+        <!-- Pager -->
+        <ul class="pager">
+            <li class="next">
+                <a href="#/">Back to Home &rarr;</a>
+            </li>
+        </ul>
+    </div>
+</div>

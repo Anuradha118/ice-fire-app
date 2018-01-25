@@ -4,21 +4,15 @@ myApp.directive("myCharacters",function(){
         restrict:"E",
         templateUrl:"./views/characters.html",
         controller : function($scope){
-            // console.log($scope.view.aliases[0]);
+            var index=$scope.view.url.lastIndexOf('/');
+            $scope.id=$scope.view.url.substring(index+1);
             if($scope.view.url.search('characters')>-1){
-                if($scope.view.aliases[0].length>1){
-                    // console.log("true");
+                if($scope.view.aliases[0].length>1 && !$scope.view.name){
                     var aliases=$scope.view.aliases[0];
-                    // console.log(aliases);
                     var name=$scope.view.name;
                     $scope.view.name=aliases;
                 }
-                console.log($scope.view);
-                // else{
-                //     $scope.view.name="Character name not available";
-                // }  
             }
-            // console.log($scope.view.name);
         }
     }
 });
@@ -29,6 +23,8 @@ myApp.directive("myBooks",function(){
         restrict:"E",
         templateUrl:"./views/books.html",
         controller : function($scope){
+            var index=$scope.view.url.lastIndexOf('/');
+            $scope.id=$scope.view.url.substring(index+1);
             // console.log($scope.view.name);
         }
     }

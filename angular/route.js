@@ -21,9 +21,9 @@ myApp.config(['$routeProvider', function($routeProvider){
         	controllerAs 	: 'myBook'
         })
         .when('/houses/:id',{
-        	templateUrl     : 'views/houses-view.html',
-        	controller 		: 'housesController',
-        	controllerAs 	: 'myHouses'
+        	templateUrl     : 'views/house-view.html',
+        	controller 		: 'houseController',
+        	controllerAs 	: 'myHouse'
         })
         // .when('/match/:roundname/:teamname',{
 
