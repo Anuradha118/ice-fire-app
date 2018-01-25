@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+
+        <div class="post-preview" ng-repeat="view in myDetails.views">
+            <!-- <a href="#" ng-href="{{view.url}}" > -->
+                <!-- <div>
+                    {{view.aliases[0]}}
+                </div> -->
+                <!-- <p>{{$index+1}}</p> -->
+                <my-characters ng-if="view.url.search('characters')>-1"></my-characters>
+                <my-books ng-if="view.url.search('books')>-1"></my-books>
+                <my-houses ng-if="view.url.search('houses')>-1"></my-houses>
+                <!-- <div>
+                    {{view.name}}
+                </div> -->
+                <!-- <div>
+                    {{view.name}}
+                </div> -->
+            </a>
+            <!-- <p class="post-meta">Posted by <a href="#">{{blog.author}}</a> on {{blog.created | date:'medium'}}</p> -->
+        </div>
+        <hr>
+        
+      
+     
+        <!-- Pager -->
+        <ul class="pager">
+            <li class="next">
+                <a href="#">Older Posts &rarr;</a>
+            </li>
+            <li class="next">
+                <a href="postCreate.html">Add a new blog &rarr;</a>
+            </li>
+        </ul>
+    </div>
+</div>
