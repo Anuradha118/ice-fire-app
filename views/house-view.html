@@ -1,4 +1,7 @@
-<div class="row">
+<div ng-show="!myHouse.isLoading">
+        <strong>Loading...</strong>
+</div>
+<div class="row" ng-show="myHouse.isLoading">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <h2>House Details :</h2>
         <hr>
@@ -6,7 +9,7 @@
             <strong>House Name - </strong> <span house>{{myHouse.name}}</span> <br/><br/>
             <strong>CoatofArms - </strong><span house>{{myHouse.coatOfArms}}</span><br/><br/>
             <strong>Region -  </strong> <span house>{{myHouse.region}}</span><br/><br/>
-            <strong>Sworn Members - </strong><span house>{{myHouse.swornMembers.toString()}}</span><br/><br/>
+            <strong>Sworn Member(s) - </strong><span house>{{myHouse.swornMembers.toString()}}</span><br/><br/>
         </div>
         <hr>
       

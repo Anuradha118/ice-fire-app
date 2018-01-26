@@ -6,27 +6,33 @@ myApp.controller('bookController',['$http','$q','$routeParams','IceFireService',
     // console.log(main.bookId);
     this.pageHeading = 'Ice and Fire';
     this.pageSubHeading = 'A collection of  all information about a popular TV Series Game of Thrones and its related book series';
-    this.authors='';
+    this.authors=[];
     this.publisher;
     this.releaseDate;
     this.numberOfPages;
+    this.mediaType;
+    this.country;
     this.name;
+    this.isLoading=false;
     // this.baseUrl = 'https://anapioficeandfire.com/api/';
   
     this.loadBook = function(){
       IceFireService.getBook(main.bookId)
       .then(function(response){
           console.log(response);
+          main.isLoading=true;
             if(!response.data.name){
               main.name="Name not available";
             }else{
               main.name=response.data.name;
             }
-        if(!response.data.authors[0]){
-          main.authors="Author not available";
-        }else{
-          main.authors = response.data.authors[0];
-        }
+            for(var i in response.data.authors){
+              if(!response.data.authors[i]){
+                main.authors.push("Author not available");
+              }else{
+                main.authors.push(response.data.authors[i]);
+              }
+            }
         if(!response.data.publisher){
           main.publisher="Publisher Not available";
         }else{
@@ -34,6 +40,8 @@ myApp.controller('bookController',['$http','$q','$routeParams','IceFireService',
         }
         main.releaseDate=response.data.released;
         main.numberOfPages=response.data.numberOfPages;
+        main.mediaType=response.data.mediaType;
+        main.country=response.data.country;
         // console.log(response.data.released);
       })
     }// end load all blogs

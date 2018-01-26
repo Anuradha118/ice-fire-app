@@ -11,12 +11,14 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
     this.releaseDate;
     this.swornMembers=[];
     this.name;
+    this.isLoading=false;
     // this.baseUrl = 'https://anapioficeandfire.com/api/';
   
     this.loadHouse = function(){
       IceFireService.getHouse(main.houseId)
       .then(function(response){
           console.log(response);
+          main.isLoading=true;
             if(!response.data.name){
                 main.name="Name not available";
             }else{

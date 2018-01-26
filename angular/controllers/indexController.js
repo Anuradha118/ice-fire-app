@@ -1,39 +1,98 @@
-myApp.controller('mainController',['$http','$q','IceFireService',function($http,$q,IceFireService) {
+myApp.controller('mainController',['$http','$q','$filter','IceFireService',function($http,$q,$filter,IceFireService) {
 
     //create a context
     var main = this;
   
-  
+    this.sortType='name';
+    this.sortReverse=false;
+    this.currentPage=0;
+    this.pageSize=13;
+    this.searchText='';
+    this.searchCharacter='';
     this.pageHeading = 'Ice and Fire';
     this.pageSubHeading = 'A collection of  all information about a popular TV Series Game of Thrones and its related book series'
     
-    // i knew the result is going to be array, so i declared an empty array to initialize
     this.views = [];
-    // console.log(main.pageHeading);
-  
-    this.baseUrl = 'https://anapioficeandfire.com/api/';
+    
+
+    this.getData = function () {
+
+      return $filter('filter')(main.views, main.searchText)
+    
+       };
+    
+    this. numberOfPages=function(){
+      return Math.ceil(main.getData().length/main.pageSize);                
+     };
   
     this.loadAll = function(){
       var characters=IceFireService.getAllCharacters();
-      // // characters.then(function(response){
-      // //   console.log(response);
-      // })
-      // console.log(characters); 
       var books = IceFireService.getAllBooks();
       var houses = IceFireService.getAllHouses();
-      // books.then(function(response){
-      //   console.log(response.data.length);
-      // })
       $q.all([characters,books,houses]).then(function(response){
-        // console.log(response);
         for(var i in response){
-          // console.log(response[i].data);
           for(var j in response[i].data)
           main.views.push(response[i].data[j]);
+          // console.log(main.views);
         }
-        // console.log(main.views);
       })
   
-    }// end load all blogs
+    }
      this.loadAll();
   }]);
+
+  myApp.filter('startFrom', function() {
+    return function(input, start) {
+    start = +start; //parse to int
+    return input.slice(start);
+   }
+  });
+
+  myApp.filter('filterAuthor',function(){
+    return function(input,searchText){
+      if(!searchText){
+        return input;
+      }
+      var res=[];
+      searchText=searchText.toLowerCase();
+      angular.forEach(input,function(item){
+        if(item.url.search('books')>-1){
+          // console.log(item);
+          for(var i in item.authors){
+            if(item.authors[i].toLowerCase().indexOf(searchText)!==-1){
+              res.push(item);
+            }
+          }          
+        }else if(item.url.search('characters')>-1){
+          // console.log(item);
+          for(var i in item.aliases){
+            if(item.aliases[i].toLowerCase().indexOf(searchText)!==-1 || item.name.toLowerCase().indexOf(searchText)!==-1){
+              res.push(item);
+            }
+          }
+        }
+      });
+      return res;
+    };
+  });
+
+  // myApp.filter('filterCharacter',function(){
+  //   return function(input,searchText){
+  //     if(!searchText){
+  //       return input;
+  //     }
+  //     var res=[];
+  //     searchText=searchText.toLowerCase();
+  //     angular.forEach(input,function(item){
+  //       if(item.url.search('characters')>-1){
+  //         console.log(item);
+  //         for(var i in item.aliases){
+  //           if(item.aliases[i].toLowerCase().indexOf(searchText)!==-1 || item.name.toLowerCase().indexOf(searchText)!==-1){
+  //             res.push(item);
+  //           }
+  //         }
+  //       }
+  //     });
+  //     return res;
+  //   };
+  // });

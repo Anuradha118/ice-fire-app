@@ -1,37 +1,43 @@
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    
+        <hr>
+            Search <input type="text" ng-model="myDetails.searchText" 
+            placeholder="Search by Author, Character" />
+            <hr>
+            <!-- Search <input type="text" ng-model="myDetails.searchChararcter" 
+            placeholder="Search by Character Name/Alias" />
+            <hr> -->
 
-        <div class="post-preview" ng-repeat="view in myDetails.views|orderBy:'name'">
-            <!-- <a href="#" ng-href="{{view.url}}" > -->
-                <!-- <div>
-                    {{view.aliases[0]}}
-                </div> -->
-                <!-- <p>{{$index+1}}</p> -->
+        <!-- <div class="post-preview" ng-repeat="view in myDetails.views|orderBy:'name'">
                 <my-characters ng-if="view.url.search('characters')>-1"></my-characters>
                 <my-books ng-if="view.url.search('books')>-1"></my-books>
                 <my-houses ng-if="view.url.search('houses')>-1"></my-houses>
-                <!-- <div>
-                    {{view.name}}
-                </div> -->
-                <!-- <div>
-                    {{view.name}}
-                </div> -->
-            </a>
-            <!-- <p class="post-meta">Posted by <a href="#">{{blog.author}}</a> on {{blog.created | date:'medium'}}</p> -->
+        </div> -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <th><a href="#/" ng-click="myDetails.sortType='name';myDetails.sortReverse=!myDetails.sortReverse">Characters/Books/Houses  <span ng-show="myDetails.sortType == 'name'" class="fa fa-caret-down"></span></a></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="view in myDetails.views|orderBy:myDetails.sortType:myDetails.sortReverse|filterAuthor:myDetails.searchText|startFrom:myDetails.currentPage*myDetails.pageSize | limitTo:myDetails.pageSize">
+                        <td><my-characters ng-if="view.url.search('characters')>-1"></my-characters>
+                        <my-books ng-if="view.url.search('books')>-1"></my-books>
+                        <my-houses ng-if="view.url.search('houses')>-1"></my-houses></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <hr>
         
       
      
         <!-- Pager -->
-        <ul class="pager">
-            <li class="next">
-                <a href="#">Older Posts &rarr;</a>
-            </li>
-            <li class="next">
-                <a href="postCreate.html">Add a new blog &rarr;</a>
-            </li>
-        </ul>
+        <button ng-disabled="myDetails.currentPage == 0" ng-click="myDetails.currentPage=myDetails.currentPage-1">
+                Previous
+        </button>
+                {{myDetails.currentPage+1}}/{{myDetails.numberOfPages()}}
+        <button ng-disabled="myDetails.currentPage >= myDetails.getData().length/myDetails.pageSize - 1" ng-click="myDetails.currentPage=myDetails.currentPage+1">
+                Next
+        </button>
     </div>
 </div>

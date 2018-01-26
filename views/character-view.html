@@ -1,13 +1,20 @@
-<div class="row">
+<div ng-show="!myCharacter.isLoading">
+        <strong>Loading...</strong>
+</div>
+<div class="row" ng-show="myCharacter.isLoading">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <h2>Character Details :</h2>
         <hr>
-        <div class="post-preview">
-            <p><strong>Character Name - </strong> {{myCharacter.name}} </p>
-            <p><strong>Character Aliase Name - </strong> {{myCharacter.aliases}}</p>
-            <p><strong>Culture -  </strong> {{myCharacter.culture}}</p>
-            <p><strong>Gender - </strong> {{myCharacter.gender}}</p>
-            <strong>Book(s) - </strong>{{myCharacter.books.toString()}}
+        <div class="post-preview" style="color:darkblue">
+            <strong>Character Name - </strong><span character>{{myCharacter.name}}</span><br/><br/>
+            <strong>Character Alias Name - </strong><span character>{{myCharacter.aliases}}</span><br/><br/>
+            <strong>Culture -  </strong><span character>{{myCharacter.culture}}</span><br/><br/>
+            <strong>Gender - </strong><span character>{{myCharacter.gender}}</span><br/><br/>
+            <strong>Father - </strong><span character>{{myCharacter.father}}</span><br/><br/>
+            <strong>Role Played By - </strong><span character>{{myCharacter.rolePlayedBy.toString()}}</span><br/><br/>
+            <strong>Book(s) - </strong><span character>{{myCharacter.books.toString()}}</span><br/><br/>
+            <strong>Title(s) - </strong><span character>{{myCharacter.titles.toString()}}</span><br/><br/>
+            <strong>Allegiance(s) - </strong><span character>{{myCharacter.allegiances.toString()}}</span>
         </div>
         <hr>
       

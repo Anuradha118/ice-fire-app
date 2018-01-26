@@ -1,4 +1,7 @@
-<div class="row">
+<div ng-show="!myBook.isLoading">
+        <strong>Loading...</strong>
+</div>
+<div class="row" ng-show="myBook.isLoading">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <h2>Book Details :</h2>
         <hr>
@@ -7,8 +10,10 @@
 
         <div class="post-preview" style="color:darkgoldenrod">
             <strong>Book Name - </strong><span book>{{myBook.name}} </span><br/><br/>
-            <strong>Author Name - </strong> <span book>{{myBook.authors}}</span><br/><br/>
+            <strong>Author(s) - </strong> <span book>{{myBook.authors.toString()}}</span><br/><br/>
             <strong>Publisher -  </strong><span book>{{myBook.publisher}}</span><br/><br/>
+            <strong>Country -  </strong><span book>{{myBook.country}}</span><br/><br/>
+            <strong>Media Type -  </strong><span book>{{myBook.mediaType}}</span><br/><br/>
             <strong>Release Date - </strong><span book>{{myBook.releaseDate|date:'dd/MMM/yyyy'}}</span><br/><br/>
             <strong>Pages - </strong><span book>{{myBook.numberOfPages}}</span><br/><br/>
         </div>
