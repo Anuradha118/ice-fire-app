@@ -36,6 +36,8 @@ myApp.directive("myHouses",function(){
         restrict:"E",
         templateUrl:"./views/houses.html",
         controller : function($scope){
+            var index=$scope.view.url.lastIndexOf('/');
+            $scope.id=$scope.view.url.substring(index+1);
             // console.log($scope.view.name);
         }
     }

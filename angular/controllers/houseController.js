@@ -34,15 +34,19 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
             }else{
             main.region=response.data.region;
             }
-            for(var i in response.data.swornMembers){
-                IceFireService.getDetails(response.data.swornMembers[i])
-                .then(function(response){
-                    if(!response.data.name){
-                        main.swornMembers.push(response.data.aliases[0]);
-                    }else{
-                        main.swornMembers.push(response.data.name);
-                    }
-                })
+            if(response.data.swornMembers.length==0){
+                main.swornMembers.push("Not Available");
+            }else{
+                for(var i in response.data.swornMembers){
+                    IceFireService.getDetails(response.data.swornMembers[i])
+                    .then(function(response){
+                        if(!response.data.name){
+                            main.swornMembers.push(response.data.aliases[0]);
+                        }else{
+                            main.swornMembers.push(response.data.name);
+                        }
+                    })
+                }
             }
         // main.releaseDate=response.data.released;
         // main.gender=response.data.gender;
