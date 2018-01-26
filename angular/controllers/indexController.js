@@ -71,28 +71,17 @@ myApp.controller('mainController',['$http','$q','$filter','IceFireService',funct
             }
           }
         }
+        // else if(item.url.search('houses')>-1){
+        //   // console.log(item);
+        //   for(var i in item.name){
+        //     if(item.name.toLowerCase().indexOf(searchText)!==-1){
+        //       res.push(item);
+        //     }
+        //   }
+        // }
       });
       return res;
     };
   });
 
-  // myApp.filter('filterCharacter',function(){
-  //   return function(input,searchText){
-  //     if(!searchText){
-  //       return input;
-  //     }
-  //     var res=[];
-  //     searchText=searchText.toLowerCase();
-  //     angular.forEach(input,function(item){
-  //       if(item.url.search('characters')>-1){
-  //         console.log(item);
-  //         for(var i in item.aliases){
-  //           if(item.aliases[i].toLowerCase().indexOf(searchText)!==-1 || item.name.toLowerCase().indexOf(searchText)!==-1){
-  //             res.push(item);
-  //           }
-  //         }
-  //       }
-  //     });
-  //     return res;
-  //   };
-  // });
+  

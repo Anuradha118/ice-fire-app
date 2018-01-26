@@ -11,6 +11,11 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
     this.releaseDate;
     this.swornMembers=[];
     this.name;
+    this.heirs;
+    this.currentLord;
+    this.founder;
+    this.titles=[];
+    this.seats=[];
     this.isLoading=false;
     // this.baseUrl = 'https://anapioficeandfire.com/api/';
   
@@ -18,21 +23,42 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
       IceFireService.getHouse(main.houseId)
       .then(function(response){
           console.log(response);
-          main.isLoading=true;
             if(!response.data.name){
                 main.name="Name not available";
             }else{
                 main.name=response.data.name;
             }
             if(!response.data.coatOfArms){
-            main.coatOfArms="CoatofArms not available";
+            main.coatOfArms="Not available";
             }else{
             main.coatOfArms = response.data.coatOfArms;
             }
             if(!response.data.region){
-            main.region="Publisher Not available";
+            main.region="Not available";
             }else{
             main.region=response.data.region;
+            }
+            if(response.data.seats.length==0){
+                main.seats.push("Not Available");
+            }else{
+                for(var i in response.data.seats){
+                    if(!response.data.seats[i]){
+                        main.seats.push("Not available");
+                    }else{
+                        main.seats.push(response.data.seats[i]);
+                    }
+                }
+            }
+            if(response.data.titles.length==0){
+                main.titles.push("Not Available");
+            }else{
+                for(var i in response.data.titles){
+                    if(!response.data.titles[i]){
+                        main.titles.push("Not available");
+                    }else{
+                        main.titles.push(response.data.titles[i]);
+                    }
+                }
             }
             if(response.data.swornMembers.length==0){
                 main.swornMembers.push("Not Available");
@@ -48,10 +74,44 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
                     })
                 }
             }
-        // main.releaseDate=response.data.released;
-        // main.gender=response.data.gender;
-        // console.log(main.name);
+            if(!response.data.founder){
+                main.founder="Not available";
+            }else{
+                IceFireService.getDetails(response.data.founder)
+                    .then(function(response){
+                        if(!response.data.name){
+                            main.founder="Not available";
+                        }else{
+                            main.founder=response.data.name;
+                        }
+                    })
+            }
+            if(!response.data.currentLord){
+                main.currentLord="Not available";
+            }else{
+                IceFireService.getDetails(response.data.currentLord)
+                    .then(function(response){
+                        if(!response.data.name){
+                            main.currentLord="Not available";
+                        }else{
+                            main.currentLord=response.data.name;
+                        }
+                    })
+            }
+            if(!response.data.heirs){
+                main.heirs="Not available";
+            }else{
+                IceFireService.getDetails(response.data.heirs)
+                    .then(function(response){
+                        if(!response.data.name){
+                            main.heirs="Not available";
+                        }else{
+                            main.heirs=response.data.name;
+                        }
+                    })
+            }
+            main.isLoading=true;
       })
-    }// end load all blogs
+    }
      this.loadHouse();
   }]);

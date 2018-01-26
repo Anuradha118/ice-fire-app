@@ -89,6 +89,6 @@ myApp.controller('characterController',['$http','$q','$routeParams','IceFireServ
         main.gender=response.data.gender;
         // console.log(main.name);
       })
-    }// end load all blogs
+    }
      this.loadCharacter();
   }]);

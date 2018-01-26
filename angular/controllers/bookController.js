@@ -44,6 +44,6 @@ myApp.controller('bookController',['$http','$q','$routeParams','IceFireService',
         main.country=response.data.country;
         // console.log(response.data.released);
       })
-    }// end load all blogs
+    }
      this.loadBook();
   }]);
