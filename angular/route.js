@@ -25,17 +25,21 @@ myApp.config(['$routeProvider', function($routeProvider){
         	controller 		: 'houseController',
         	controllerAs 	: 'myHouse'
         })
-        // .when('/match/:roundname/:teamname',{
+        .when('/404',{
 
-        // 	templateUrl     : 'views/match-view.html',
-        // 	controller 		: 'singleMatchController',
-        // 	controllerAs 	: 'singleMatch'
-        // })
+        	templateUrl     : 'views/not-found-error.html',
+        })
+
+        .when('/500',{
+
+        	templateUrl     : 'views/internal-server-error.html',
+        })
 
         .otherwise(
             {
                 //redirectTo:'/'
-                template   : '<h1>404 page not found</h1>'
+                // template   : '<h1>404 page not found</h1>'
+                templateUrl   : 'views/not-found-error.html'
             }
         );
 }]);

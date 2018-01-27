@@ -1,4 +1,4 @@
-myApp.controller('houseController',['$http','$q','$routeParams','IceFireService',function($http,$q,$routeParams,IceFireService) {
+myApp.controller('houseController',['$http','$q','$location','$routeParams','IceFireService',function($http,$q,$location,$routeParams,IceFireService) {
 
     //create a context
     var main = this;
@@ -111,6 +111,15 @@ myApp.controller('houseController',['$http','$q','$routeParams','IceFireService'
                     })
             }
             main.isLoading=true;
+      },function error(response){
+        console.log(response);
+        switch (response.status) {
+            case 404:
+              $location.path('/404');
+              break;
+            default:
+              $location.path('/500');
+          }
       })
     }
      this.loadHouse();

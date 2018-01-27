@@ -1,4 +1,4 @@
-myApp.controller('characterController',['$http','$q','$routeParams','IceFireService',function($http,$q,$routeParams,IceFireService) {
+myApp.controller('characterController',['$http','$q','$location','$routeParams','IceFireService',function($http,$q,$location,$routeParams,IceFireService) {
 
     //create a context
     var main = this;
@@ -88,6 +88,15 @@ myApp.controller('characterController',['$http','$q','$routeParams','IceFireServ
         // main.books=response.data.books[0];
         main.gender=response.data.gender;
         // console.log(main.name);
+      },function error(response){
+        console.log(response);
+        switch (response.status) {
+            case 404:
+              $location.path('/404');
+              break;
+            default:
+              $location.path('/500');
+          }
       })
     }
      this.loadCharacter();

@@ -1,4 +1,4 @@
-myApp.controller('mainController',['$http','$q','$filter','IceFireService',function($http,$q,$filter,IceFireService) {
+myApp.controller('mainController',['$http','$q','$location','$filter','IceFireService',function($http,$q,$location,$filter,IceFireService) {
 
     //create a context
     var main = this;
@@ -34,6 +34,15 @@ myApp.controller('mainController',['$http','$q','$filter','IceFireService',funct
           for(var j in response[i].data)
           main.views.push(response[i].data[j]);
           // console.log(main.views);
+        }
+      },function error(response){
+        console.log(response);
+        switch (response.status) {
+          case 404:
+            $location.path('/404');
+            break;
+          default:
+            $location.path('/500');
         }
       })
   

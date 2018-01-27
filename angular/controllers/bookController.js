@@ -1,4 +1,4 @@
-myApp.controller('bookController',['$http','$q','$routeParams','IceFireService',function($http,$q,$routeParams,IceFireService) {
+myApp.controller('bookController',['$http','$q','$location','$routeParams','IceFireService',function($http,$q,$location,$routeParams,IceFireService) {
 
     //create a context
     var main = this;
@@ -43,6 +43,15 @@ myApp.controller('bookController',['$http','$q','$routeParams','IceFireService',
         main.mediaType=response.data.mediaType;
         main.country=response.data.country;
         // console.log(response.data.released);
+      },function error(response){
+        console.log(response);
+        switch (response.status) {
+            case 404:
+              $location.path('/404');
+              break;
+            default:
+              $location.path('/500');
+          }
       })
     }
      this.loadBook();
